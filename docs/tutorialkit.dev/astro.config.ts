@@ -13,6 +13,11 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin',
     },
   },
+  vite: {
+    ssr: {
+      noExternal: '@tutorialkit/react',
+    },
+  },
   integrations: [
     react(),
     UnoCSS(),
@@ -62,6 +67,10 @@ export default defineConfig({
               label: 'Overriding Components',
               link: '/guides/overriding-components/',
             },
+            {
+              label: 'How to use TutorialKit API',
+              link: '/guides/how-to-use-tutorialkit-api/',
+            },
           ],
         },
         {
@@ -78,6 +87,10 @@ export default defineConfig({
             {
               label: 'React Components',
               link: '/reference/react-components',
+            },
+            {
+              label: 'TutorialKit API',
+              link: '/reference/tutorialkit-api',
             },
           ],
         },

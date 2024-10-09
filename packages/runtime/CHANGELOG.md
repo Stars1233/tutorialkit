@@ -1,3 +1,55 @@
+# [1.0.0](https://github.com/stackblitz/tutorialkit/compare/0.2.3...1.0.0) "@tutorialkit/runtime" (2024-10-01)
+
+
+### Bug Fixes
+
+* prevent overwriting template files via `<FileTree>` ([#336](https://github.com/stackblitz/tutorialkit/issues/336)) ([23ed41c](https://github.com/stackblitz/tutorialkit/commit/23ed41c827073a205a2ceaa78973a9200a84c72d))
+
+
+### Features
+
+* add files via file tree ([#314](https://github.com/stackblitz/tutorialkit/issues/314)) ([7782bdc](https://github.com/stackblitz/tutorialkit/commit/7782bdc6e7da0429061c881ac2f95829f149a907))
+* **runtime:** add `terminal.input` for writing to stdin ([#350](https://github.com/stackblitz/tutorialkit/issues/350)) ([c0b8f41](https://github.com/stackblitz/tutorialkit/commit/c0b8f41a28259cc19d7049be2506a5b246d6f32d))
+* support glob patterns in `editor.fileTree.allowEdits` ([#332](https://github.com/stackblitz/tutorialkit/issues/332)) ([c1a59f5](https://github.com/stackblitz/tutorialkit/commit/c1a59f54c5b5700b8ec8ed5a4a3ebf2169b2409c))
+* sync files from WebContainer to editor ([#334](https://github.com/stackblitz/tutorialkit/issues/334)) ([5c1de69](https://github.com/stackblitz/tutorialkit/commit/5c1de69c0e4e233a25a2f9b70fbb1f6c93f12356))
+
+
+
+## [0.2.3](https://github.com/stackblitz/tutorialkit/compare/0.2.2...0.2.3) "@tutorialkit/runtime" (2024-09-10)
+
+
+### Bug Fixes
+
+* **react:** stale lesson data after navigation ([#318](https://github.com/stackblitz/tutorialkit/issues/318)) ([2b5fc92](https://github.com/stackblitz/tutorialkit/commit/2b5fc92fe962fee63b4d2f2efcce04602157268b))
+
+
+
+## [0.2.2](https://github.com/stackblitz/tutorialkit/compare/0.2.1...0.2.2) "@tutorialkit/runtime" (2024-09-04)
+
+
+### Features
+
+* **react:** add button to reload a preview ([#305](https://github.com/stackblitz/tutorialkit/issues/305)) ([d14c404](https://github.com/stackblitz/tutorialkit/commit/d14c4045ad692a45b5b388bb4cfcca9762e6142c))
+
+
+
+## [0.2.1](https://github.com/stackblitz/tutorialkit/compare/0.2.0...0.2.1) "@tutorialkit/runtime" (2024-08-30)
+
+
+
+# [0.2.0](https://github.com/stackblitz/tutorialkit/compare/0.1.6...0.2.0) "@tutorialkit/runtime" (2024-08-28)
+
+
+
+## [0.1.6](https://github.com/stackblitz/tutorialkit/compare/0.1.5...0.1.6) "@tutorialkit/runtime" (2024-08-26)
+
+
+### Features
+
+* **runtime:** option for setting terminal open by default ([#246](https://github.com/stackblitz/tutorialkit/issues/246)) ([5419038](https://github.com/stackblitz/tutorialkit/commit/5419038d1c0a6f80da4d9f31e330d0dc0e41def8))
+
+
+
 ## [0.1.5](https://github.com/stackblitz/tutorialkit/compare/0.1.4...0.1.5) "@tutorialkit/runtime" (2024-08-16)
 
 

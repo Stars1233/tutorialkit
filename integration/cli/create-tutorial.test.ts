@@ -1,8 +1,8 @@
-import path from 'node:path';
 import fs from 'node:fs/promises';
-import { describe, beforeEach, afterAll, expect, it } from 'vitest';
+import path from 'node:path';
 import { execa } from 'execa';
 import { temporaryDirectory } from 'tempy';
+import { describe, beforeEach, afterAll, expect, it } from 'vitest';
 
 const baseDir = path.resolve(__dirname, '../..');
 
@@ -48,6 +48,20 @@ describe.each(['npm', 'pnpm', 'yarn'])('%s', (packageManager) => {
     const distFiles = await fs.readdir(path.join(dest, 'dist'), { recursive: true });
 
     expect(filesToJSON(distFiles)).toMatchFileSnapshot(`${snapshotPrefix}-built.json`);
+  });
+
+  it<TestContext>('created project contains overwritten UnoCSS config', async ({ projectName, dest }) => {
+    await createProject(projectName, packageManager, { cwd: tmp });
+
+    const unoConfig = await fs.readFile(`${dest}/uno.config.ts`, 'utf8');
+
+    expect(unoConfig).toBe(`\
+import { defineConfig } from '@tutorialkit/theme';
+
+export default defineConfig({
+  // add your UnoCSS config here: https://unocss.dev/guide/config-file
+});
+`);
   });
 });
 

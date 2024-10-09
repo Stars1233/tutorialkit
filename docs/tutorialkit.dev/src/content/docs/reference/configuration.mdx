@@ -85,6 +85,48 @@ type I18nText = {
   filesTitleText?: string,
 
   /**
+   * Text shown on file tree's context menu's file creation button.
+   *
+   * @default 'Create file'
+   */
+  fileTreeCreateFileText?: string,
+
+  /**
+   * Text shown on file tree's context menu's folder creation button.
+   *
+   * @default 'Create folder'
+   */
+  fileTreeCreateFolderText?: string,
+
+  /**
+   * Text shown on dialog when user attempts to edit files that don't match allowed patterns.
+   *
+   * @default 'This action is not allowed'
+   */
+  fileTreeActionNotAllowedText?: string,
+
+  /**
+   * Text shown on dialog when user attempts create file or folder that already exists on filesystem but is not visible on file tree, e.g. template files.
+   *
+   * @default 'File exists on filesystem already'
+   */
+  fileTreeFileExistsAlreadyText?: string,
+
+  /**
+   * Text shown on dialog describing allowed patterns when file or folder creation failed.
+   *
+   * @default 'Created files and folders must match following patterns:'
+   */
+  fileTreeAllowedPatternsText?: string,
+
+  /**
+   * Text shown on confirmation buttons on dialogs.
+   *
+   * @default 'OK'
+   */
+  confirmationText?: string,
+
+  /**
    * Text shown on top of the steps section.
    *
    * @default 'Preparing Environment'
@@ -97,6 +139,13 @@ type I18nText = {
    * @default 'Preview'
    */
   defaultPreviewTitleText?: string,
+
+  /**
+   * Title attribute for the preview reload button.
+   *
+   * @default 'Reload Preview'
+   */
+  reloadPreviewTitle?: string,
 
   /**
    * Text for the toggle terminal button.
@@ -127,8 +176,48 @@ Defines which file should be opened in the [code editor](/guides/ui/#code-editor
 <PropertyTable inherited type="string" />
 
 ##### `editor`
-Configure whether or not the editor should be rendered. If an object is provided with `fileTree: false`, only the file tree is hidden.
-<PropertyTable inherited type="boolean | { fileTree: false }" />
+Configures options for the editor and its file tree. Editor can be hidden by providing `false`.
+Optionally you can hide just file tree by providing `fileTree: false`.
+
+File tree can be set to allow file editing from right clicks by setting `fileTree.allowEdits: true`.
+
+<PropertyTable inherited type={'Editor'} />
+
+The `Editor` type has the following shape:
+
+```ts
+type GlobPattern = string
+
+type Editor =
+    | false
+    | { editor: { allowEdits: boolean | GlobPattern | GlobPattern[] } }
+
+```
+
+Example values:
+
+```yaml
+editor: false # Editor is hidden
+
+editor: # Editor is visible
+  fileTree: false # File tree is hidden
+
+editor: # Editor is visible
+  fileTree: # File tree is visible
+    allowEdits: true # User can add new files and folders from the file tree
+
+
+editor: # Editor is visible
+  fileTree: # File tree is visible
+    allowEdits: "/src/**" # User can add files and folders anywhere inside "/src/"
+
+editor: # Editor is visible
+  fileTree: # File tree is visible
+    allowEdits:
+      - "/*" # User can add files and folders directly in the root
+      - "/first-level/allowed-filename-only.js" # Only "allowed-filename-only.js" inside "/first-level" folder
+      - "**/second-level/**" # Anything inside "second-level" folders anywhere
+```
 
 ##### `previews`
 Configure which ports should be used for the previews allowing you to align the behavior with your demo application's dev server setup. If not specified, the lowest port will be used.
@@ -184,6 +273,35 @@ type Command = string
     | { command: string, title: string }
 
 ```
+
+##### `filesystem`
+Configures how changes such as files being modified or added in WebContainer should be reflected in the editor when they weren't caused by the user directly. By default, the editor will not reflect these changes.
+
+An example use case is when a user runs a command that modifies a file. For instance when a `package.json` is modified by doing an `npm install <xyz>`. If `watch` is set to `true`, the file will be updated in the editor. If set to `false`, the file will not be updated.
+
+This property is by default set to `false` as it can impact performance. If you are creating a lesson where the user is expected to modify files outside the editor, you may want to keep this to `false`.
+
+<PropertyTable inherited type={'FileSystem'} />
+
+The `FileSystem` type has the following shape:
+
+```ts
+type FileSystem = {
+  watch: boolean
+}
+
+```
+
+Example values:
+
+```yaml
+filesystem:
+  watch: true  # Filesystem changes are reflected in the editor
+
+filesystem:
+  watch: false # Or if it's omitted, the default value is false
+```
+
 
 ##### `terminal`
 Configures one or more terminals. TutorialKit provides two types of terminals: read-only, called `output`, and interactive, called `terminal`. Note, that there can be only one `output` terminal.
@@ -244,7 +362,7 @@ Navigating to a lesson that specifies `autoReload` will always reload the previe
 Specifies which folder from the `src/templates/` directory should be used as the basis for the code. See the "[Code templates](/guides/creating-content/#code-templates)" guide for a detailed explainer.
 <PropertyTable inherited type="string" />
 
-#### `editPageLink`
+##### `editPageLink`
 Display a link in lesson for editing the page content.
 The value is a URL pattern where `${path}` is replaced with the lesson's location relative to the `src/content/tutorial`.
 
@@ -271,7 +389,7 @@ You can instruct Github to show the source code instead by adding `plain=1` quer
 
 :::
 
-### `openInStackBlitz`
+##### `openInStackBlitz`
 Display a link for opening current lesson in StackBlitz.
 <PropertyTable inherited type="OpenInStackBlitz" />
 
@@ -285,3 +403,47 @@ type OpenInStackBlitz =
 type TemplateType = "html" | "node" | "angular-cli" | "create-react-app" | "javascript" | "polymer" | "typescript" | "vue"
 
 ```
+
+## Configure the Tutorialkit Astro integration
+
+`@tutorialkit/astro` is an integration for Astro. You can configure the integration in your `astro.config.ts` file.
+
+```ts "tutorialkit()" title="astro.config.ts"
+import tutorialkit from "@tutorialkit/astro";
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  devToolbar: {
+    enabled: false,
+  },
+  integrations: [
+    tutorialkit(),
+  ],
+});
+```
+
+You can pass the following options to the `tutorialkit` integration:
+
+### `components`
+
+**type**: `OverrideComponentsOptions`
+
+Provide the path to the components you want to override.
+
+```ts
+tutorialkit({
+  components: {
+    TopBar: './src/components/CustomTopBar.astro',
+  },
+});
+```
+
+See [Overriding Components](/guides/overriding-components/) for details of all the components that you can override.
+
+### `defaultRoutes`
+
+**type**: `boolean | "tutorial-only"`<br/>
+**default**: `true`
+
+Controls whether the tutorial routes are automatically added to your project. When set to `true`, it additionally adds a redirect from `/` to the first tutorial.
+Use `"tutorial-only"` to only add the tutorial routes without the redirect.

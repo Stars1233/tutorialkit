@@ -53,6 +53,65 @@ export const i18nSchema = z.object({
   filesTitleText: z.string().optional().describe('Text shown on top of the file tree.'),
 
   /**
+   * Text shown on file tree's context menu's file creation button.
+   *
+   * @default 'Create file'
+   */
+  fileTreeCreateFileText: z
+    .string()
+    .optional()
+    .describe("Text shown on file tree's context menu's file creation button."),
+
+  /**
+   * Text shown on file tree's context menu's folder creation button.
+   *
+   * @default 'Create folder'
+   */
+  fileTreeCreateFolderText: z
+    .string()
+    .optional()
+    .describe("Text shown on file tree's context menu's folder creation button."),
+
+  /**
+   * Text shown on dialog when user attempts to edit files that don't match allowed patterns.
+   *
+   * @default 'This action is not allowed'
+   */
+  fileTreeActionNotAllowedText: z
+    .string()
+    .optional()
+    .describe("Text shown on dialog when user attempts to edit files that don't match allowed patterns."),
+
+  /**
+   * Text shown on dialog when user attempts create file or folder that already exists on filesystem but is not visible on file tree, e.g. template files.
+   *
+   * @default 'File exists on filesystem already'
+   */
+  fileTreeFileExistsAlreadyText: z
+    .string()
+    .optional()
+    .describe(
+      'Text shown on dialog when user attempts create file or folder that already exists on filesystem but is not visible on file tree, e.g. template files.',
+    ),
+
+  /**
+   * Text shown on dialog describing allowed patterns when file or folder creation failed.
+   *
+   * @default 'Created files and folders must match following patterns:'
+   */
+  fileTreeAllowedPatternsText: z
+    .string()
+    .optional()
+    .describe('Text shown on dialog describing allowed patterns when file or folder creation failed.'),
+
+  /**
+   * Text shown on confirmation buttons on dialogs.
+   *
+   * @default 'OK'
+   */
+  confirmationText: z.string().optional().describe('Text shown on confirmation buttons on dialogs.'),
+
+  /**
    * Text shown on top of the steps section.
    *
    * @default 'Preparing Environment'
@@ -65,6 +124,13 @@ export const i18nSchema = z.object({
    * @default 'Preview'
    */
   defaultPreviewTitleText: z.string().optional().describe('Text shown on top of the preview section.'),
+
+  /**
+   * Title attribute for the preview reload button.
+   *
+   * @default 'Reload Preview'
+   */
+  reloadPreviewTitle: z.string().optional().describe('Title attribute for the preview reload button.'),
 
   /**
    * Text for the toggle terminal button.

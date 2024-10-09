@@ -1,3 +1,44 @@
+# [1.0.0](https://github.com/stackblitz/tutorialkit/compare/0.2.3...1.0.0) "@tutorialkit/theme" (2024-10-01)
+
+
+### Features
+
+* support glob patterns in `editor.fileTree.allowEdits` ([#332](https://github.com/stackblitz/tutorialkit/issues/332)) ([c1a59f5](https://github.com/stackblitz/tutorialkit/commit/c1a59f54c5b5700b8ec8ed5a4a3ebf2169b2409c))
+
+
+
+## [0.2.3](https://github.com/stackblitz/tutorialkit/compare/0.2.2...0.2.3) "@tutorialkit/theme" (2024-09-10)
+
+
+
+## [0.2.2](https://github.com/stackblitz/tutorialkit/compare/0.2.1...0.2.2) "@tutorialkit/theme" (2024-09-04)
+
+
+
+## [0.2.1](https://github.com/stackblitz/tutorialkit/compare/0.2.0...0.2.1) "@tutorialkit/theme" (2024-08-30)
+
+
+
+# [0.2.0](https://github.com/stackblitz/tutorialkit/compare/0.1.6...0.2.0) "@tutorialkit/theme" (2024-08-28)
+
+
+### Features
+
+* rename `@tutorialkit/components-react` to `@tutorialkit/react` ([#155](https://github.com/stackblitz/tutorialkit/issues/155)) ([e3c0fee](https://github.com/stackblitz/tutorialkit/commit/e3c0fee902a7bfc312fb01b30531209815d460c3))
+* simplify UnoCSS integration ([#270](https://github.com/stackblitz/tutorialkit/issues/270)) ([8d49ef8](https://github.com/stackblitz/tutorialkit/commit/8d49ef81272d84cbfa2c1a10742f01540fe3650c))
+
+
+### BREAKING CHANGES
+
+* rename `@tutorialkit/components-react` to `@tutorialkit/react` (#155)
+* simplify UnoCSS integration (#270)
+
+
+
+## [0.1.6](https://github.com/stackblitz/tutorialkit/compare/0.1.5...0.1.6) "@tutorialkit/theme" (2024-08-26)
+
+
+
 ## [0.1.5](https://github.com/stackblitz/tutorialkit/compare/0.1.4...0.1.5) "@tutorialkit/theme" (2024-08-16)
 
 

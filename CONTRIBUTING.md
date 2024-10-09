@@ -4,14 +4,14 @@ Hi! We are really excited that you are interested in contributing to TutorialKit
 
 ## Repo Setup
 
-The TutorialKit repo is a monorepo using pnpm workspaces. The package manager used to install and link dependencies must be [pnpm](https://pnpm.io/).
+The TutorialKit repo is a monorepo using pnpm workspaces. The package manager used to install and link dependencies must be [pnpm](https://pnpm.io/). Package manager versioning is handled by [`packageManager`](https://nodejs.org/api/packages.html#packagemanager) field that's supported by [Node's Corepack](https://nodejs.org/api/corepack.html) and other tools.
 
 To develop and test packages:
 
 1. Clone this repository and navigate into the cloned directory.
 
 ```
-git clone git@github.com:stackblitz/tutorialkit.git
+git clone https://github.com/stackblitz/tutorialkit
 cd tutorialkit
 ```
 
@@ -21,6 +21,7 @@ cd tutorialkit
 
 4. Run `pnpm run dev` to build sources in watch mode
   - Development environment starts in http://localhost:4321/
+  - You can use `TUTORIALKIT_VITE_INSPECT` environment variable to enable [`vite-plugin-inspect`](https://github.com/antfu-collective/vite-plugin-inspect) during deveplopment.
 
 5. Run `pnpm run test` to run core tests
 
@@ -31,7 +32,7 @@ The monorepo consists of multiple packages that are grouped into following group
 These packages will be installed by the end-users in their `package.json`.
 
 - `@tutorialkit/astro`
-- `@tutorialkit/components-react`
+- `@tutorialkit/react`
 - `@tutorialkit/runtime`
 - `@tutorialkit/theme`
 - `@tutorialkit/types`
@@ -53,7 +54,7 @@ You may wish to test your locally-modified copy of TutorialKit against another p
   "pnpm": {
     "overrides": {
       "@tutorialkit/astro": "file:../tutorialkit/packages/astro",
-      "@tutorialkit/components-react": "file:../tutorialkit/packages/components/react",
+      "@tutorialkit/react": "file:../tutorialkit/packages/react",
       "@tutorialkit/runtime": "file:../tutorialkit/packages/runtime",
       "@tutorialkit/theme": "file:../tutorialkit/packages/theme",
       "@tutorialkit/types": "file:../tutorialkit/packages/types"

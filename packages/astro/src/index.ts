@@ -1,19 +1,12 @@
-import { rules, shortcuts, theme } from '@tutorialkit/theme';
-import type { AstroConfig, AstroIntegration } from 'astro';
 import { fileURLToPath } from 'node:url';
+import type { AstroConfig, AstroIntegration } from 'astro';
 import { extraIntegrations } from './integrations.js';
 import { updateMarkdownConfig } from './remark/index.js';
 import { tutorialkitCore } from './vite-plugins/core.js';
 import { userlandCSS, watchUserlandCSS } from './vite-plugins/css.js';
-import { tutorialkitStore } from './vite-plugins/store.js';
 import { overrideComponents, type OverrideComponentsOptions } from './vite-plugins/override-components.js';
+import { tutorialkitStore } from './vite-plugins/store.js';
 import { WebContainerFiles } from './webcontainer-files/index.js';
-
-export const unoCSSConfig = {
-  theme,
-  rules,
-  shortcuts,
-};
 
 export interface Options {
   /**
@@ -94,21 +87,21 @@ export default function createPlugin({
           vite: {
             optimizeDeps: {
               entries: ['!**/src/(content|templates)/**'],
-              include: process.env.TUTORIALKIT_DEV ? [] : ['@tutorialkit/components-react'],
+              include: process.env.TUTORIALKIT_DEV ? [] : ['@tutorialkit/react'],
             },
             define: {
               __ENTERPRISE__: `${!!enterprise}`,
               __WC_CONFIG__: enterprise ? JSON.stringify(enterprise) : 'undefined',
             },
             ssr: {
-              noExternal: ['@tutorialkit/astro', '@tutorialkit/components-react'],
+              noExternal: ['@tutorialkit/astro', '@tutorialkit/react'],
             },
             plugins: [
               userlandCSS,
               tutorialkitStore,
               tutorialkitCore,
               overrideComponents({ components, defaultRoutes: !!defaultRoutes }),
-              process.env.TUTORIALKIT_DEV ? (await import('vite-plugin-inspect')).default() : null,
+              process.env.TUTORIALKIT_VITE_INSPECT ? (await import('vite-plugin-inspect')).default() : null,
             ],
           },
         });
@@ -133,7 +126,7 @@ export default function createPlugin({
 
         // inject the additional integrations right after ours
         const selfIndex = config.integrations.findIndex((integration) => integration.name === '@tutorialkit/astro');
-        config.integrations.splice(selfIndex + 1, 0, ...extraIntegrations());
+        config.integrations.splice(selfIndex + 1, 0, ...extraIntegrations({ root: fileURLToPath(config.root) }));
       },
       'astro:config:done'({ config }) {
         _config = config;

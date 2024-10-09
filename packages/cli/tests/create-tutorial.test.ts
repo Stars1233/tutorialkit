@@ -1,8 +1,8 @@
-import { execa } from 'execa';
-import fs from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
+import fs from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { execa } from 'execa';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
 // on CI on windows we want to make sure to use the same drive, so we use a custom logic
@@ -242,7 +242,7 @@ async function runPnpmInstall(dest: string, baseDir: string) {
     overrides: {
       '@astrojs/language-server': '2.14.1',
       '@tutorialkit/astro': `file:${baseDir}/packages/astro`,
-      '@tutorialkit/components-react': `file:${baseDir}/packages/components/react`,
+      '@tutorialkit/react': `file:${baseDir}/packages/react`,
       '@tutorialkit/runtime': `file:${baseDir}/packages/runtime`,
       '@tutorialkit/theme': `file:${baseDir}/packages/theme`,
       '@tutorialkit/types': `file:${baseDir}/packages/types`,

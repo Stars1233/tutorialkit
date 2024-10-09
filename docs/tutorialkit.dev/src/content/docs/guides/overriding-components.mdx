@@ -3,6 +3,7 @@ title: 'Overriding Components'
 description: "Override TutorialKit's default components to fit your needs."
 ---
 import { Image } from 'astro:assets';
+import uiDialog from './images/ui-dialog.png';
 import uiTopBar from './images/ui-top-bar.png';
 
 TutorialKit's default components are customizable with [theming](/reference/theming/) options.
@@ -44,6 +45,7 @@ tutorialkit({
 When overriding `TopBar` you can place TutorialKit's default components using following [Astro slots](https://docs.astro.build/en/basics/astro-components/#named-slots):
 
 - `logo`: Logo of the application
+- `open-in-stackblitz-link`: Link for opening current lesson in StackBlitz
 - `theme-switch`:  Switch for changing the theme
 - `login-button`: For StackBlitz Enterprise user, the login button
 
@@ -59,6 +61,32 @@ When overriding `TopBar` you can place TutorialKit's default components using fo
 
   <LanguageSelect />
 
+  <slot name="open-in-stackblitz-link" />
+
   <slot name="login-button" />
 </nav>
+```
+
+### Dialog
+
+<Image src={uiDialog} alt="TutorialKit's Dialog" />
+
+Component for overriding confirmation dialogs. This component has to be a React component and be the default export of that module.
+
+It will receive same props that `@tutorialkit/react/dialog` supports:
+
+```ts
+interface Props {
+  /** Title of the dialog */
+  title: string;
+
+  /** Text for the confirmation button */
+  confirmText: string;
+
+  /** Callback invoked when dialog is closed */
+  onClose: () => void;
+
+  /** Content of the dialog */
+  children: ReactNode;
+}
 ```

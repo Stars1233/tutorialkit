@@ -1,6 +1,6 @@
 {
   "name": "@tutorialkit/types",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "Types for TutorialKit",
   "author": "StackBlitz Inc.",
   "type": "module",
@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "typescript": "^5.4.5",
-    "vitest": "^1.6.0"
+    "vitest": "^2.1.1"
   }
 }

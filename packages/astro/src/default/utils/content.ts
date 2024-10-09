@@ -1,12 +1,11 @@
-import type { ChapterSchema, Lesson, LessonSchema, PartSchema, Tutorial, TutorialSchema } from '@tutorialkit/types';
-import { interpolateString } from '@tutorialkit/types';
-import { getCollection } from 'astro:content';
 import path from 'node:path';
-import { DEFAULT_LOCALIZATION } from './content/default-localization';
+import type { ChapterSchema, Lesson, LessonSchema, PartSchema, Tutorial, TutorialSchema } from '@tutorialkit/types';
+import { interpolateString, DEFAULT_LOCALIZATION } from '@tutorialkit/types';
+import { getCollection } from 'astro:content';
+import { getFilesRefList } from './content/files-ref';
 import { squash } from './content/squash.js';
 import { logger } from './logger';
 import { joinPaths } from './url';
-import { getFilesRefList } from './content/files-ref';
 
 export async function getTutorial(): Promise<Tutorial> {
   const collection = sortCollection(await getCollection('tutorial'));
@@ -59,7 +58,7 @@ export async function getTutorial(): Promise<Tutorial> {
       }
 
       if (!_tutorial.parts[partId].chapters[chapterId]) {
-        throw new Error(`Could not find chapter '${partId}'`);
+        throw new Error(`Could not find chapter '${chapterId}'`);
       }
 
       const { Content } = await entry.render();
@@ -246,8 +245,10 @@ export async function getTutorial(): Promise<Tutorial> {
           'editor',
           'focus',
           'i18n',
+          'meta',
           'editPageLink',
           'openInStackBlitz',
+          'filesystem',
         ],
       ),
     };
@@ -320,7 +321,7 @@ function getSlug(entry: CollectionEntryTutorial) {
   return slug;
 }
 
-interface CollectionEntryTutorial {
+export interface CollectionEntryTutorial {
   id: string;
   slug: string;
   body: string;

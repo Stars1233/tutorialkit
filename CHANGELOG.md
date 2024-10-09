@@ -1,3 +1,98 @@
+# [1.0.0](https://github.com/stackblitz/tutorialkit/compare/0.2.3...1.0.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **astro:** better default meta tags ([#342](https://github.com/stackblitz/tutorialkit/issues/342)) ([d81d1cc](https://github.com/stackblitz/tutorialkit/commit/d81d1cc01fdbce702ae91a6a5f371bd03c38b338))
+* **astro:** published package missing `@tutorialkit/astro/types` ([#347](https://github.com/stackblitz/tutorialkit/issues/347)) ([f49e910](https://github.com/stackblitz/tutorialkit/commit/f49e9107d35b98079a0fb16c74b9f37a45357661))
+* prevent overwriting template files via `<FileTree>` ([#336](https://github.com/stackblitz/tutorialkit/issues/336)) ([23ed41c](https://github.com/stackblitz/tutorialkit/commit/23ed41c827073a205a2ceaa78973a9200a84c72d))
+
+
+### Features
+
+* add files via file tree ([#314](https://github.com/stackblitz/tutorialkit/issues/314)) ([7782bdc](https://github.com/stackblitz/tutorialkit/commit/7782bdc6e7da0429061c881ac2f95829f149a907))
+* **astro:** override components to support `Dialog` ([#345](https://github.com/stackblitz/tutorialkit/issues/345)) ([61a542e](https://github.com/stackblitz/tutorialkit/commit/61a542e7e13b3eaf52b04624954398a8d95a8d46))
+* mark `@tutorialkit/react` component API as experimental feature ([#346](https://github.com/stackblitz/tutorialkit/issues/346)) ([67042ef](https://github.com/stackblitz/tutorialkit/commit/67042efba00dbfa738d2eeff06e3104b4292a486))
+* **runtime:** add `terminal.input` for writing to stdin ([#350](https://github.com/stackblitz/tutorialkit/issues/350)) ([c0b8f41](https://github.com/stackblitz/tutorialkit/commit/c0b8f41a28259cc19d7049be2506a5b246d6f32d))
+* support glob patterns in `editor.fileTree.allowEdits` ([#332](https://github.com/stackblitz/tutorialkit/issues/332)) ([c1a59f5](https://github.com/stackblitz/tutorialkit/commit/c1a59f54c5b5700b8ec8ed5a4a3ebf2169b2409c))
+* sync files from WebContainer to editor ([#334](https://github.com/stackblitz/tutorialkit/issues/334)) ([5c1de69](https://github.com/stackblitz/tutorialkit/commit/5c1de69c0e4e233a25a2f9b70fbb1f6c93f12356))
+
+
+### BREAKING CHANGES
+
+* mark `@tutorialkit/react` component API as experimental feature (#346)
+
+
+
+## [0.2.3](https://github.com/stackblitz/tutorialkit/compare/0.2.2...0.2.3) (2024-09-10)
+
+
+### Bug Fixes
+
+* **react:** stale lesson data after navigation ([#318](https://github.com/stackblitz/tutorialkit/issues/318)) ([2b5fc92](https://github.com/stackblitz/tutorialkit/commit/2b5fc92fe962fee63b4d2f2efcce04602157268b))
+
+
+
+## [0.2.2](https://github.com/stackblitz/tutorialkit/compare/0.2.1...0.2.2) (2024-09-04)
+
+
+### Bug Fixes
+
+* align `Powered by WebContainers` to the bottom ([#301](https://github.com/stackblitz/tutorialkit/issues/301)) ([98ef05b](https://github.com/stackblitz/tutorialkit/commit/98ef05b828ff8f3ab45a49e62bf1a4b79e65acfc))
+* **react:** refresh preview when `autoReload: true` ([#303](https://github.com/stackblitz/tutorialkit/issues/303)) ([9754b26](https://github.com/stackblitz/tutorialkit/commit/9754b2671c9e896a63ca49053fc1dde78a88e0c7))
+
+
+### Features
+
+* **react:** add button to reload a preview ([#305](https://github.com/stackblitz/tutorialkit/issues/305)) ([d14c404](https://github.com/stackblitz/tutorialkit/commit/d14c4045ad692a45b5b388bb4cfcca9762e6142c))
+
+
+
+## [0.2.1](https://github.com/stackblitz/tutorialkit/compare/0.2.0...0.2.1) (2024-08-30)
+
+
+### Bug Fixes
+
+* **astro:** work-around for dev-mode's `ReferenceError: __WC_CONFIG__ is not defined` errors ([#293](https://github.com/stackblitz/tutorialkit/issues/293)) ([70fa3e2](https://github.com/stackblitz/tutorialkit/commit/70fa3e2895f2f2c4d25aa3410690297afb49a44b))
+
+
+
+# [0.2.0](https://github.com/stackblitz/tutorialkit/compare/0.1.6...0.2.0) (2024-08-28)
+
+
+### Features
+
+* rename `@tutorialkit/components-react` to `@tutorialkit/react` ([#155](https://github.com/stackblitz/tutorialkit/issues/155)) ([e3c0fee](https://github.com/stackblitz/tutorialkit/commit/e3c0fee902a7bfc312fb01b30531209815d460c3))
+* simplify UnoCSS integration ([#270](https://github.com/stackblitz/tutorialkit/issues/270)) ([8d49ef8](https://github.com/stackblitz/tutorialkit/commit/8d49ef81272d84cbfa2c1a10742f01540fe3650c))
+
+
+### BREAKING CHANGES
+
+* rename `@tutorialkit/components-react` to `@tutorialkit/react` (#155)
+* simplify UnoCSS integration (#270)
+
+
+
+## [0.1.6](https://github.com/stackblitz/tutorialkit/compare/0.1.5...0.1.6) (2024-08-26)
+
+
+### Bug Fixes
+
+* **astro/types:** `webcontainer` should be a `Promise<WebContainer>` ([#259](https://github.com/stackblitz/tutorialkit/issues/259)) ([c7bad20](https://github.com/stackblitz/tutorialkit/commit/c7bad203045b702afda3176cece645bee4d4f6e3))
+* **cli:** `create-tutorial` not depending on `@tutorialkit/cli` package ([#254](https://github.com/stackblitz/tutorialkit/issues/254)) ([3b480db](https://github.com/stackblitz/tutorialkit/commit/3b480dbd682a8c7657151dc93054f8209fdad312))
+* missing preview i18n ([#255](https://github.com/stackblitz/tutorialkit/issues/255)) ([095ed57](https://github.com/stackblitz/tutorialkit/commit/095ed570702d1b8de9370565b94103cd0740c408))
+* **react:** editor and preview missing accessible names ([#267](https://github.com/stackblitz/tutorialkit/issues/267)) ([bcbffe6](https://github.com/stackblitz/tutorialkit/commit/bcbffe6df0321aca1f649d26b09d9c3c8f8e4b7c))
+* **react:** file tree's files to indicate selected state ([#268](https://github.com/stackblitz/tutorialkit/issues/268)) ([bd8a3be](https://github.com/stackblitz/tutorialkit/commit/bd8a3be8165b4a66efd550370fd5a7bebb9e62aa))
+* **react:** solve-button not working before lesson loads ([#266](https://github.com/stackblitz/tutorialkit/issues/266)) ([547e70a](https://github.com/stackblitz/tutorialkit/commit/547e70a090d4509a60e9fc776f5abd3eb4315477))
+
+
+### Features
+
+* add Vue language to CodeMirror ([#256](https://github.com/stackblitz/tutorialkit/issues/256)) ([f9b265f](https://github.com/stackblitz/tutorialkit/commit/f9b265f7372c8246a4ccf2d41f0be8fe44d30aa7))
+* **runtime:** option for setting terminal open by default ([#246](https://github.com/stackblitz/tutorialkit/issues/246)) ([5419038](https://github.com/stackblitz/tutorialkit/commit/5419038d1c0a6f80da4d9f31e330d0dc0e41def8))
+
+
+
 ## [0.1.5](https://github.com/stackblitz/tutorialkit/compare/0.1.4...0.1.5) (2024-08-16)
 
 

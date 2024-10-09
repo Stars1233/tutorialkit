@@ -4,6 +4,7 @@ description: Use TutorialKit's React components for fun and profit.
 ---
 import PackageManagerTabs from '@components/Tabs/PackageManagerTabs.astro'
 import { Code } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 import themeCSS from '@tutorialkit/astro/default-theme.css?raw';
 
 import Example from '@components/react-examples/Example.astro';
@@ -17,8 +18,16 @@ import sourceExampleSimpleEditor from '@components/react-examples/ExampleSimpleE
 import sourceExampleFileTree from '@components/react-examples/ExampleFileTree?raw';
 import sourceExampleCodeMirrorEditor from '@components/react-examples/ExampleCodeMirrorEditor?raw';
 import sourceExampleTerminal from '@components/react-examples/ExampleTerminal?raw';
+import sourceUseWebcontainer from "@components/react-examples/hooks/useWebcontainer?raw";
 
 You can reuse TutorialKit's React components in your own applications. They are designed to work well with the [WebContainer API][webcontainers].
+
+:::note
+Using `@tutorialkit/react` package directly without `@tutorialkit/astro` is **experimental** at the moment.
+This package may introduce breaking changes in patch and minor version updates. Pay extra attention when updating the versions.
+
+We are planning to stabilize component API of `@tutorialkit/react` in future.
+:::
 
 Here's a simple editor that can be made with those components:
 
@@ -32,17 +41,17 @@ These components use TutorialKit's design system which is based on an atomic CSS
 <PackageManagerTabs>
   <Fragment slot="npm">
   ```shell
-  npm install @tutorialkit/components-react @tutorialkit/theme unocss @iconify-json/ph fast-glob
+  npm install @tutorialkit/react @tutorialkit/theme
   ```
   </Fragment>
   <Fragment slot="pnpm">
   ```shell
-  pnpm install @tutorialkit/components-react @tutorialkit/theme unocss @iconify-json/ph fast-glob
+  pnpm install @tutorialkit/react @tutorialkit/theme
   ```
   </Fragment>
   <Fragment slot="yarn">
   ```shell
-  yarn add @tutorialkit/components-react @tutorialkit/theme unocss @iconify-json/ph fast-glob
+  yarn add @tutorialkit/react @tutorialkit/theme
   ```
   </Fragment>
 </PackageManagerTabs>
@@ -50,25 +59,10 @@ These components use TutorialKit's design system which is based on an atomic CSS
 To setup UnoCSS with TutorialKit's components, you need to create a `uno.config.ts`:
 
 ```ts title=uno.config.ts
-import { theme, rules, shortcuts } from '@tutorialkit/theme';
-import { convertPathToPattern, globSync } from 'fast-glob';
-import fs from 'node:fs/promises';
-import { join } from 'path';
-import { defineConfig, presetIcons, presetUno, transformerDirectives } from 'unocss';
+import { defineConfig } from '@tutorialkit/theme';
 
 export default defineConfig({
-  theme,
-  rules,
-  shortcuts,
-  content: {
-    inline: globSync(
-      `${convertPathToPattern(join(require.resolve('@tutorialkit/components-react'), '..'))}/**/*.js`,
-    ).map((filePath) => {
-      return () => fs.readFile(filePath, { encoding: 'utf8' });
-    }),
-  },
-  transformers: [transformerDirectives()],
-  presets: [presetUno(), presetIcons()],
+  // add your UnoCSS config here: https://unocss.dev/guide/config-file
 });
 ```
 
@@ -89,6 +83,17 @@ See a full example on [StackBlitz][stackblitz-example].
 
 ## Components
 
+These examples have references to the following files:
+
+<Tabs syncKey="referenced-files">
+  <TabItem label="hooks/useTheme.ts">
+    <Code code={"export function useTheme() {\n  return 'light';\n}"} lang="ts" class="limit-code-height" />
+  </TabItem>
+
+  <TabItem label="hooks/useWebcontainer.ts">
+    <Code code={sourceUseWebcontainer} lang="ts" class="limit-code-height" />
+  </TabItem>
+</Tabs>
 
 ### `FileTree`
 
@@ -109,11 +114,26 @@ A component to list files in a tree view.
 
 * `onFileSelect: (file: string) => void` - A callback that will be called when a file is clicked. The path of the file that was clicked will be passed as an argument.
 
+* `onFileChange: (event: FileChangeEvent) => Promise<void>` - An optional callback that will be called when a new file or folder is created from the file tree's context menu. This callback should throw errors with `FilesystemError` messages.
+  ```ts
+  interface FileChangeEvent {
+    type: 'file' | 'folder';
+    method: 'add' | 'remove' | 'rename';
+    value: string;
+  }
+
+  type FilesystemError = 'FILE_EXISTS' | 'FOLDER_EXISTS';
+  ```
+
+* `allowEditPatterns?: string[]` - Glob patterns for paths that allow editing files and folders. Disabled by default.
+
 * `hideRoot: boolean` - Whether or not to hide the root directory in the tree. Defaults to `false`.
 
 * `hiddenFiles: (string | RegExp)[]` - A list of file paths that should be hidden from the tree.
 
 * `scope?: string` - Every file path that does not start with this scope will be hidden.
+
+* `i18n?: object` - Texts for file tree's components.
 
 * `className?: string` - A class name to apply to the root element of the component.
 
